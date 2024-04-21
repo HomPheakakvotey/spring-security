@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Set;
 
@@ -12,7 +13,7 @@ import java.util.Set;
 @Getter
 @NoArgsConstructor
 @Table(name = "roles_tbl")
-public class Role {
+public class Role implements GrantedAuthority {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -23,4 +24,8 @@ public class Role {
     @ManyToMany
     Set<Authority> authorities;
 
+    @Override
+    public String getAuthority() {
+        return "ROLE_" + this.name;
+    }
 }

@@ -20,10 +20,14 @@ public class User {
 
     @Column(unique = true)
     private String email;
-
     private String password;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private boolean isAccountExpired;
+    private boolean isAccountLocked;
+    private boolean isCredentialsExpired;
+    private boolean isDisabled;
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     Set<Role> roles;
 
 }
